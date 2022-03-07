@@ -4,10 +4,18 @@ import 'package:cash/utils/values/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CashScreen extends StatelessWidget {
+class CashScreen extends StatefulWidget {
   CashScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CashScreen> createState() => _CashScreenState();
+}
+
+class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
+  late final tabController;
+
   final cash = 23092.20;
+
   final interest = 28.03;
 
   final iconList = [
@@ -35,6 +43,12 @@ class CashScreen extends StatelessWidget {
   ];
 
   final valuesList = <double>[1500, -193.02, 7500, 37, 2, 5, 19.99, -5454, 64];
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
 
   Color getColor(double value) => value >= 0 ? accentColor : redColor;
 
@@ -72,7 +86,8 @@ class CashScreen extends StatelessWidget {
                             children: [
                               Container(
                                 height: 150,
-                                child: PageView(
+                                child: TabBarView(
+                                  controller: tabController,
                                   children: [
                                     balanceWidget,
                                     balanceWidget,
@@ -80,6 +95,7 @@ class CashScreen extends StatelessWidget {
                                 ),
                               ),
                               TabPageSelector(
+                                controller: tabController,
                                 color: whiteOpacity,
                                 selectedColor: Colors.white,
                                 indicatorSize: 7,
