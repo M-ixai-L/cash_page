@@ -137,7 +137,9 @@ class CashScreen extends StatelessWidget {
         height: 1.0,
       );
 
-  Widget simpleTab(String tabName) => Center(child: Text(tabName));
+  Widget simpleTab(String tabName) {
+    return Container(color: Colors.white, child: Center(child: Text(tabName)));
+  }
 
   Widget customTile(int index) {
     const leadingSize = 34.0;
