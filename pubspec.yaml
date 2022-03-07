@@ -2,7 +2,7 @@ name: cash
 description: A new Flutter project.
 
 
-publish_to:
+publish_to: 'none'
 
 
 version: 1.0.0+1
@@ -29,7 +29,7 @@ flutter:
   fonts:
     - family:  CustomIcons
       fonts:
-        - asset: lib/fonts/CustomIcons.ttf
+        - asset: assets/fonts/CustomIcons.ttf
 
   uses-material-design: true
 
