@@ -66,7 +66,27 @@ class CashScreen extends StatelessWidget {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        balanceWidget,
+                        DefaultTabController(
+                          length: 2,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 150,
+                                child: PageView(
+                                  children: [
+                                    balanceWidget,
+                                    balanceWidget,
+                                  ],
+                                ),
+                              ),
+                              TabPageSelector(
+                                color: whiteOpacity,
+                                selectedColor: Colors.white,
+                                indicatorSize: 7,
+                              ),
+                            ],
+                          ),
+                        ),
                         Flexible(
                           child: Container(
                             margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -119,7 +139,7 @@ class CashScreen extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 5),
         ),
         Container(
-          padding: const EdgeInsets.only(bottom: 30),
+          padding: const EdgeInsets.only(bottom: 0),
           child: Text(
             '+ $interest %',
             style: TextStyle(
