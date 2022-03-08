@@ -3,4 +3,5 @@ class Constants {
   static const weeklyTabName = 'WEEKLY';
   static const monthlyTabName = 'MONTHLY';
   static const yearlyTabName = 'YEARLY';
+  static const FontSFPro = 'SFPro';
 }

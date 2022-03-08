@@ -3,6 +3,7 @@ import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CashScreen extends StatefulWidget {
   CashScreen({Key? key}) : super(key: key);
@@ -15,19 +16,21 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
   late final tabController;
 
   final cash = 23092.20;
-
   final interest = 28.03;
+  final interestIncome = 47;
+  final expenses = -5320.80;
+  final incomes = 9821;
 
   final iconList = [
-    Icons.home_filled,
-    CustomIcons.cab,
-    CustomIcons.money,
-    CustomIcons.food,
-    CustomIcons.coffeeCup,
-    CustomIcons.food,
-    CustomIcons.mobile,
-    CustomIcons.mobile,
-    CustomIcons.mobile,
+    'Home',
+    'Car',
+    'Money',
+    'Food',
+    'Cup',
+    'Food',
+    'Phone',
+    'Phone',
+    'Phone',
   ];
 
   final titleList = [
@@ -42,7 +45,17 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
     'Mobile Account',
   ];
 
-  final valuesList = <double>[1500, -193.02, 7500, 37, 2, 5, 19.99, -5454, 64];
+  final valuesList = <double>[
+    1500,
+    -193.02,
+    7500,
+    -37,
+    -2,
+    -5,
+    -19.99,
+    -5454,
+    64
+  ];
 
   @override
   void initState() {
@@ -58,8 +71,9 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
 
   String getSignText(double sign) {
     final value = sign % 1 == 0 ? sign.toInt() : sign;
-
     if (!value.isNegative) return '\$$value';
+    if (!(sign % 1 == 0))
+      return value.toStringAsFixed(2).replaceRange(1, 1, '\$');
     return value.toString().replaceRange(1, 1, '\$');
   }
 
@@ -90,13 +104,13 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                                   controller: tabController,
                                   children: [
                                     balanceWidget,
-                                    balanceWidget,
+                                    balanceIncomeWidget,
                                   ],
                                 ),
                               ),
                               TabPageSelector(
                                 controller: tabController,
-                                color: whiteOpacity,
+                                color: Color(0xFFFFFFFF).withOpacity(0.30),
                                 selectedColor: Colors.white,
                                 indicatorSize: 7,
                               ),
@@ -149,21 +163,134 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
         ),
         Container(
           child: Text(
-            '\$ $cash',
-            style: TextStyle(fontSize: 40, color: Colors.white),
+            '\$${cash.toStringAsFixed(2)}',
+            style: TextStyle(
+                fontSize: 40,
+                color: Colors.white,
+                fontFamily: Constants.FontSFPro,
+                fontWeight: FontWeight.w700),
           ),
           padding: const EdgeInsets.only(bottom: 5),
         ),
         Container(
           padding: const EdgeInsets.only(bottom: 0),
           child: Text(
-            '+ $interest %',
+            '+ $interest%',
             style: TextStyle(
               fontSize: 16,
               color: Colors.white.withOpacity(0.8),
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget get balanceIncomeWidget {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Flexible(
+          child: Container(
+            padding: EdgeInsets.only(right: 48, left: 25),
+            child: SizedBox(
+              width: 115,
+              height: 115,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  CircularProgressIndicator(
+
+                    value: interestIncome / 100,
+                    strokeWidth: 6,
+                    valueColor: AlwaysStoppedAnimation(Colors.white),
+                    backgroundColor: Color(0xFFFFFFFF).withOpacity(0.15),
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '$interestIncome',
+                          style: TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                              fontFamily: Constants.FontSFPro,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: Text(
+                            '%',
+                            style: TextStyle(
+                              fontSize: 19,
+                              color: Color(0xFFFFFFFF).withOpacity(0.5),
+                              fontFamily: Constants.FontSFPro,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+        Flexible(
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only( top: 20),
+                  child: Text(
+                    'INCOMES',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFFFFFFFF).withOpacity(0.5),
+                      fontFamily: Constants.FontSFPro,
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    '\$ ${incomes.toStringAsFixed(2)}',
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontFamily: Constants.FontSFPro),
+                  ),
+                  // padding: const EdgeInsets.only(bottom: 5),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 131, top: 16),
+                  child: Text(
+                    'EXPENSES',
+                    style: TextStyle(
+                      //fontFamily: SF,
+                      fontSize: 12,
+                      fontFamily: Constants.FontSFPro,
+                      color: Color(0xFFFFFFFF).withOpacity(0.5),
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    '${getSignText(expenses)}',
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontFamily: Constants.FontSFPro),
+                  ),
+                  // padding: const EdgeInsets.only(bottom: 5),
+                ),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
@@ -180,25 +307,31 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
   Widget customTile(int index) {
     const leadingSize = 34.0;
     return ListTile(
-      leading: Container(
-        height: leadingSize,
-        width: leadingSize,
-        decoration: BoxDecoration(
-          color: accentColor.withOpacity(0.1),
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          iconList[index],
+      leading: CircleAvatar(
+        radius: 19,
+        backgroundColor: accentColor.withOpacity(0.1),
+        child: SvgPicture.asset(
+          'assets/icons/${iconList[index]}.svg',
+          // height: 15,
+          // width: 13,
           color: accentColor,
         ),
       ),
-      title: Text(titleList[index]),
+      title: Text(
+        titleList[index],
+        style: TextStyle(
+            color: Color(0xCC000000),
+            fontFamily: Constants.FontSFPro,
+            fontSize: 16,
+            fontWeight: FontWeight.w500),
+      ),
       trailing: Text(
         getSignText(valuesList[index]),
         style: TextStyle(
-          color: getColor(valuesList[index]),
-          fontSize: 20,
-        ),
+            color: getColor(valuesList[index]),
+            fontSize: 22,
+            fontFamily: Constants.FontSFPro,
+            fontWeight: FontWeight.w500),
       ),
     );
   }
@@ -212,11 +345,20 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
             icon: const Icon(Icons.arrow_back_ios_outlined),
             onPressed: () => showSnackBar(context, 'Go to home'),
           ),
-          Text('Accounts', style: TextStyle(fontSize: 17)),
+          Text(
+            'Accounts',
+            style: TextStyle(fontFamily: Constants.FontSFPro, fontSize: 17),
+          ),
         ],
       ),
       leadingWidth: 120,
-      title: const Text('Cash'),
+      title: const Text(
+        'Cash',
+        style: TextStyle(
+            color: Color(0xCCFFFFFF),
+            fontFamily: Constants.FontSFPro,
+            fontSize: 17),
+      ),
       centerTitle: true,
       actions: <Widget>[
         IconButton(
@@ -231,9 +373,15 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
       elevation: 0.0,
       bottom: const TabBar(
         indicatorColor: Colors.white,
-        labelStyle: TextStyle(fontSize: 13),
+        labelStyle: TextStyle(
+            fontSize: 13,
+            fontFamily: Constants.FontSFPro,
+            color: Color(0xB3FFFFFF),
+            fontWeight: FontWeight.w600),
         tabs: [
-          Tab(text: Constants.dailyTabName),
+          Tab(
+            text: Constants.dailyTabName,
+          ),
           Tab(text: Constants.weeklyTabName),
           Tab(text: Constants.monthlyTabName),
           Tab(text: Constants.yearlyTabName),
