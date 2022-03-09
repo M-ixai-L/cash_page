@@ -3,6 +3,7 @@ import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
 
   final cash = 23092.20;
   final interest = 28.03;
-  final interestIncome = 47;
+  final interestIncome = 45;
   final expenses = -5320.80;
   final incomes = 9821;
 
@@ -79,6 +80,12 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final appbar = appBar(context);
+    final heightList = MediaQuery.of(context).size.height -
+        appbar.preferredSize.height -
+        MediaQuery.of(context).padding.top -
+        166;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -92,7 +99,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                 child: Column(
                   children: <Widget>[
                     Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         DefaultTabController(
                           length: 2,
@@ -110,31 +117,17 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                               ),
                               TabPageSelector(
                                 controller: tabController,
-                                color: Color(0xFFFFFFFF).withOpacity(0.30),
+                                color: Colors.white.withOpacity(0.30),
                                 selectedColor: Colors.white,
                                 indicatorSize: 7,
                               ),
                             ],
                           ),
                         ),
-                        Flexible(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: ListView.separated(
-                              itemCount: titleList.length,
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              separatorBuilder: (_, __) => customDivider,
-                              itemBuilder: (_, index) => customTile(index),
-                            ),
-                          ),
-                        ),
+
                       ],
                     ),
+                    balanceChangeWidget(heightList),
                   ],
                 ),
               ),
@@ -157,7 +150,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
             'BALANCE',
             style: TextStyle(
               fontSize: 12,
-              color: Color(0xFFDEDEDE).withOpacity(0.5),
+              color: Colors.white.withOpacity(0.5),
             ),
           ),
         ),
@@ -200,11 +193,10 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                 fit: StackFit.expand,
                 children: [
                   CircularProgressIndicator(
-
                     value: interestIncome / 100,
                     strokeWidth: 6,
                     valueColor: AlwaysStoppedAnimation(Colors.white),
-                    backgroundColor: Color(0xFFFFFFFF).withOpacity(0.15),
+                    backgroundColor: Colors.white.withOpacity(0.15),
                   ),
                   Center(
                     child: Row(
@@ -225,7 +217,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                             '%',
                             style: TextStyle(
                               fontSize: 19,
-                              color: Color(0xFFFFFFFF).withOpacity(0.5),
+                              color: Colors.white.withOpacity(0.5),
                               fontFamily: Constants.FontSFPro,
                             ),
                           ),
@@ -245,12 +237,12 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.only( top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Text(
                     'INCOMES',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Color(0xFFFFFFFF).withOpacity(0.5),
+                      color: Colors.white.withOpacity(0.5),
                       fontFamily: Constants.FontSFPro,
                     ),
                   ),
@@ -273,7 +265,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                       //fontFamily: SF,
                       fontSize: 12,
                       fontFamily: Constants.FontSFPro,
-                      color: Color(0xFFFFFFFF).withOpacity(0.5),
+                      color: Colors.white.withOpacity(0.5),
                     ),
                   ),
                 ),
@@ -295,6 +287,72 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
     );
   }
 
+  Widget  balanceChangeWidget (double heightList){
+    const Key centerKey = ValueKey<String>('bottom-sliver-list');
+    return SizedBox(
+      height: heightList,
+      child: CustomScrollView(
+        center: centerKey,
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Flexible(
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(top: 28, bottom: 16),
+                    child: TextButton(
+                      onPressed: () => showSnackBar(context, 'add new'),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(8)),
+                        height: 40,
+                        width: 100,
+                        child: Text(
+                          'Add new',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontFamily: 'SFPro',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              childCount: 1,
+            ),
+          ),
+          SliverList(
+            key: centerKey,
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ListView.separated(
+                    itemCount: titleList.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    separatorBuilder: (_, __) => customDivider,
+                    itemBuilder: (_, index) => customTile(index),
+                  ),
+                );
+              },
+              childCount: 1,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget get customDivider => Divider(
         color: Colors.black.withOpacity(0.1),
         height: 1.0,
@@ -305,10 +363,9 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
   }
 
   Widget customTile(int index) {
-    const leadingSize = 34.0;
     return ListTile(
       leading: CircleAvatar(
-        radius: 19,
+        radius: 17,
         backgroundColor: accentColor.withOpacity(0.1),
         child: SvgPicture.asset(
           'assets/icons/${iconList[index]}.svg',
