@@ -84,7 +84,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
     final heightList = MediaQuery.of(context).size.height -
         appbar.preferredSize.height -
         MediaQuery.of(context).padding.top -
-        166;
+        165;
 
     return DefaultTabController(
       length: 4,
@@ -140,7 +140,6 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
       ),
     );
   }
-
   Widget get balanceWidget {
     return Column(
       children: [
@@ -180,6 +179,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
   }
 
   Widget get balanceIncomeWidget {
+    const double indicatorRadius = 115;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -187,8 +187,8 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
           child: Container(
             padding: EdgeInsets.only(right: 48, left: 25),
             child: SizedBox(
-              width: 115,
-              height: 115,
+              width: indicatorRadius,
+              height:indicatorRadius,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -300,7 +300,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                 return Flexible(
                   child: Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.only(top: 28, bottom: 16),
+                    padding: EdgeInsets.only(top: 28),
                     child: TextButton(
                       onPressed: () => showSnackBar(context, 'add new'),
                       child: Container(
