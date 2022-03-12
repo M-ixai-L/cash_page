@@ -1,43 +1,40 @@
+import 'package:flutter/material.dart';
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cash/utils/values/lists.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class CashScreen extends StatefulWidget {
-  const CashScreen({Key? key}) : super(key: key);
+
+class AccountsScreen extends StatefulWidget {
+  const AccountsScreen({Key? key}) : super(key: key);
 
   @override
-  State<CashScreen> createState() => _CashScreenState();
+  State<StatefulWidget> createState() => _AccountsScreenState();
 }
 
-class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
+class _AccountsScreenState extends State<AccountsScreen>
+    with TickerProviderStateMixin {
   late final tabController;
-
-  final cash = 23092.20;
-  final interest = 28.03;
+  final balance = -171559.8;
+  final interest = 4.28;
   final interestIncome = 45;
   final expenses = -5320.80;
   final incomes = 9821;
-
-  @override
-  void initState() {
-    tabController = TabController(length: 2, vsync: this);
-    super.initState();
-  }
-
-  Color getColor(double value) => value >= 0 ? accentColor : redColor;
-
-  void showSnackBar(BuildContext context, String text) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
-  }
 
   String getSignText(double sign) {
     final value = sign % 1 == 0 ? sign.toInt() : sign;
     if (!value.isNegative) return '\$$value';
 
     return value.toString().replaceRange(1, 1, '\$');
+  }
+
+  Color getColor(double value) => value >= 0 ? accentColor : redColor;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
   }
 
   @override
@@ -52,12 +49,12 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
       length: 4,
       child: Scaffold(
         appBar: appBar(context),
-        backgroundColor: accentColor,
+        backgroundColor: getColor(balance),
         body: TabBarView(
           children: [
             SingleChildScrollView(
               child: Container(
-                color: accentColor,
+                color: getColor(balance),
                 child: Column(
                   children: <Widget>[
                     Column(
@@ -117,7 +114,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
         ),
         Container(
           child: Text(
-            '\$${cash.toStringAsFixed(2)}',
+            getSignText(balance),
             style: TextStyle(
                 fontSize: 40,
                 color: whiteColor,
@@ -240,73 +237,24 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
   }
 
   Widget balanceChangeWidget(double heightList) {
-    const Key centerKey = ValueKey<String>('bottom-sliver-list');
-    return SizedBox(
-      height: heightList,
-      child: CustomScrollView(
-        center: centerKey,
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 28),
-                  child: TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/addNewCashScreen'),
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: whiteColor.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8)),
-                      height: 40,
-                      width: 100,
-                      child: Text(
-                        'Add new',
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontSize: 17,
-                          fontFamily: 'SFPro',
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-              childCount: 1,
-            ),
+    return
+     Container(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: ListView.separated(
+            itemCount: accountList.length,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (_, index) => customTile(index),
+          separatorBuilder: (_, __) => customDivider,
           ),
-          SliverList(
-            key: centerKey,
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  decoration: BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ListView.separated(
-                    itemCount: titleList.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    separatorBuilder: (_, __) => customDivider,
-                    itemBuilder: (_, index) => customTile(index),
-                  ),
-                );
-              },
-              childCount: 1,
-            ),
-          ),
-        ],
-      ),
+
+
     );
   }
 
   Widget get customDivider => Divider(
-        color: blackColor.withOpacity(0.1),
-        height: 1.0,
+        color: getColor(balance),
+        height: 8.0,
       );
 
   Widget simpleTab(String tabName) {
@@ -314,70 +262,53 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
   }
 
   Widget customTile(int index) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 17,
-        backgroundColor: accentColor.withOpacity(0.1),
-        child: SvgPicture.asset(
-          'assets/icons/${iconList[titleList[index]]}.svg',
-          // height: 15,
-          // width: 13,
-          color: accentColor,
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+        color: whiteColor
+      ),
+      child: ListTile(
+       onTap: () => Navigator.pushNamed(context, '/cashScreen'),
+        title: Text(
+          accountList[index],
+          style: TextStyle(
+              color: blackColor.withOpacity(0.8),
+              fontFamily: Constants.FontSFPro,
+              fontSize: 16,
+              fontWeight: FontWeight.w500),
         ),
-      ),
-      title: Text(
-        titleList[index],
-        style: TextStyle(
-            color: blackColor.withOpacity(0.8),
-            fontFamily: Constants.FontSFPro,
-            fontSize: 16,
-            fontWeight: FontWeight.w500),
-      ),
-      trailing: Text(
-        getSignText(valuesList[index]),
-        style: TextStyle(
-            color: getColor(valuesList[index]),
-            fontSize: 22,
-            fontFamily: Constants.FontSFPro,
-            fontWeight: FontWeight.w500),
+        subtitle: Text(
+          getSignText(valuesList[index]),
+          style: TextStyle(
+              color: getColor(valuesList[index]),
+              fontSize: 28,
+              fontFamily: Constants.FontSFPro,
+              fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: accentColor,
-      leading: TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/accountsScreen'),
-        child: Row(
-          children: const <Widget>[
-            Icon(
-              Icons.arrow_back_ios_outlined,
-              color: whiteColor,
-            ),
-            Text(
-              'Accounts',
-              style: TextStyle(
-                  fontFamily: Constants.FontSFPro,
-                  fontSize: 17,
-                  color: whiteColor),
-            ),
-          ],
+      backgroundColor: getColor(balance),
+      leading: IconButton(
+        icon:  SvgPicture.asset(
+          'assets/icons/settings.svg',
+
+          color: whiteColor,
         ),
+        onPressed: () => Navigator.pushNamed(context, '/settingsScreen'),
       ),
-      leadingWidth: 120,
+      leadingWidth: 48,
       title: const Text(
-        'Cash',
-        style: TextStyle(
-            color: Color(0xCCFFFFFF),
-            fontFamily: Constants.FontSFPro,
-            fontSize: 17),
+        'Accounts',
+        style: TextStyle(fontFamily: Constants.FontSFPro, fontSize: 17),
       ),
       centerTitle: true,
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.search),
-          onPressed: () => showSnackBar(context, 'Search'),
+          onPressed: () => print('asdf'),
         ),
         IconButton(
           icon: const Icon(CupertinoIcons.add),
