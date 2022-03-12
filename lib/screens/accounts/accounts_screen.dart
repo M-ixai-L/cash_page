@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:cash/utils/values/lists.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class AccountsScreen extends StatefulWidget {
   const AccountsScreen({Key? key}) : super(key: key);
 
@@ -237,18 +236,15 @@ class _AccountsScreenState extends State<AccountsScreen>
   }
 
   Widget balanceChangeWidget(double heightList) {
-    return
-     Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.separated(
-            itemCount: accountList.length,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (_, index) => customTile(index),
-          separatorBuilder: (_, __) => customDivider,
-          ),
-
-
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: ListView.separated(
+        itemCount: accountList.length,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (_, index) => customTile(index),
+        separatorBuilder: (_, __) => customDivider,
+      ),
     );
   }
 
@@ -263,11 +259,10 @@ class _AccountsScreenState extends State<AccountsScreen>
 
   Widget customTile(int index) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-        color: whiteColor
-      ),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8), color: whiteColor),
       child: ListTile(
-       onTap: () => Navigator.pushNamed(context, '/cashScreen'),
+        onTap: () => Navigator.pushNamed(context, '/cashScreen'),
         title: Text(
           accountList[index],
           style: TextStyle(
@@ -288,13 +283,110 @@ class _AccountsScreenState extends State<AccountsScreen>
     );
   }
 
+  Widget get bottomSheetWidget {
+    return Container(
+      //margin: EdgeInsets.symmetric(horizontal: 10),
+      height: 230,
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  height: 38,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Add',
+                    style: TextStyle(
+                      color: blackColor.withOpacity(0.3),
+                      fontSize: 13,
+                      fontFamily: 'SFPro',
+                    ),
+                  ),
+                ),
+                separatorWidget,
+                Container(
+                  height: 58,
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/addNewCashScreen'),
+                    child: Text(
+                      'Operation',
+                      style: TextStyle(
+                        color: accentColor,
+                        fontSize: 20,
+                        fontFamily: 'SFPro',
+                      ),
+                    ),
+                  ),
+                ),
+                separatorWidget,
+                Container(
+                  height: 58,
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/addNewCashScreen'),
+                    child: Text(
+                      'Account',
+                      style: TextStyle(
+                        color: accentColor,
+                        fontSize: 20,
+                        fontFamily: 'SFPro',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 2),
+              height: 57,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child:
+                  //onPressed: () => Navigator.pushNamed(context, '/addNewCashScreen'),
+                  Text(
+                'Cancel',
+                style: TextStyle(
+                  color: accentColor,
+                  fontSize: 20,
+                  fontFamily: 'SFPro',
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  PreferredSize get separatorWidget {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(1),
+      child: Container(
+        color: Colors.black.withOpacity(0.1),
+        height: 1,
+      ),
+    );
+  }
   AppBar appBar(BuildContext context) {
     return AppBar(
       backgroundColor: getColor(balance),
       leading: IconButton(
-        icon:  SvgPicture.asset(
+        icon: SvgPicture.asset(
           'assets/icons/settings.svg',
-
           color: whiteColor,
         ),
         onPressed: () => Navigator.pushNamed(context, '/settingsScreen'),
@@ -312,7 +404,13 @@ class _AccountsScreenState extends State<AccountsScreen>
         ),
         IconButton(
           icon: const Icon(CupertinoIcons.add),
-          onPressed: () => Navigator.pushNamed(context, '/addNewCashScreen'),
+          onPressed: () => showModalBottomSheet<void>(
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (BuildContext context) {
+              return bottomSheetWidget;
+            },
+          ),
         ),
       ],
       elevation: 0.0,
@@ -321,7 +419,7 @@ class _AccountsScreenState extends State<AccountsScreen>
         labelStyle: TextStyle(
             fontSize: 13,
             fontFamily: Constants.FontSFPro,
-            color: Color(0xB3FFFFFF),
+            color: whiteColorOpacity70,
             fontWeight: FontWeight.w600),
         tabs: [
           Tab(
