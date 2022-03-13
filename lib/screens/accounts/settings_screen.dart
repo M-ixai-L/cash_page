@@ -275,7 +275,7 @@ class _SettingsScreenState extends State<SettingsScreen>
       leadingWidth: 87,
       elevation: 0,
       leading: TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/accountsScreen'),
+        onPressed: () => Navigator.pop(context),
         child: Text(
           'Cancel',
           style: TextStyle(

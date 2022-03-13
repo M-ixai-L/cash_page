@@ -21,6 +21,16 @@ final categoryList = [
   'Rental revenue',
   'Salary',
 ];
+final incomeList = [
+  'Salary',
+  'Rental revenue',
+];
+final expenseList = [
+  'Food & Restaurants',
+  'Car',
+  'Coffee',
+  'Mobile Account',
+];
 final titleList = [
   'Rental revenue',
   'Car',
