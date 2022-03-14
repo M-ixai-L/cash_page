@@ -101,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             child: Text(
               title,
               style: TextStyle(
-                  fontFamily: Constants.FontSFPro,
+                  fontFamily: Constants.fontSFPro,
                   fontSize: 15,
                   color: blackColor.withOpacity(0.7)),
             ),
@@ -115,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen>
               alignment: Alignment.centerRight,
               style: TextStyle(
                   color: accentColor,
-                  fontFamily: Constants.FontSFPro,
+                  fontFamily: Constants.fontSFPro,
                   fontSize: 16),
               icon: const Icon(
                 Icons.arrow_forward_ios_outlined,
@@ -142,7 +142,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         title,
         style: TextStyle(
             fontSize: 14,
-            fontFamily: Constants.FontSFPro,
+            fontFamily: Constants.fontSFPro,
             color: blackColor.withOpacity(0.3)),
       ),
     );
@@ -159,7 +159,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             child: Text(
               title,
               style: TextStyle(
-                  fontFamily: Constants.FontSFPro,
+                  fontFamily: Constants.fontSFPro,
                   fontSize: 15,
                   color: blackColor.withOpacity(0.7)),
             ),
@@ -176,7 +176,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             child: Text(
               'PRO',
               style: TextStyle(
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 12,
                 color: whiteColor,
               ),
@@ -204,7 +204,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             child: Text(
               'Subscribe',
               style: TextStyle(
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 17,
                 color: whiteColor,
               ),
@@ -229,7 +229,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             child: Text(
               'Send your review',
               style: TextStyle(
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 17,
                 color: accentColor,
               ),
@@ -254,7 +254,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             child: Text(
               'Rate in App Store',
               style: TextStyle(
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 17,
                 color: accentColor,
               ),
@@ -274,7 +274,7 @@ class _SettingsScreenState extends State<SettingsScreen>
           'Cancel',
           style: TextStyle(
               color: accentColor,
-              fontFamily: Constants.FontSFPro,
+              fontFamily: Constants.fontSFPro,
               fontSize: 17),
         ),
       ),
@@ -283,7 +283,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         'Settings',
         style: TextStyle(
             color: Colors.black,
-            fontFamily: Constants.FontSFPro,
+            fontFamily: Constants.fontSFPro,
             fontSize: 17,
             fontWeight: FontWeight.w500),
       ),
@@ -294,7 +294,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             'Save',
             style: TextStyle(
                 color: accentColor,
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 17),
           ),
         ),

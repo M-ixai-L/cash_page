@@ -27,9 +27,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
   String getTitle(bool value) => value == true ? 'Expense' : 'Income';
 
   String getDate(DateTime? date) {
-    if (date == null) {
-      return "Today";
-    }
+    if (date == null) return "Today";
     if (DateFormat.MMMEd().format(date) ==
         DateFormat.MMMEd().format(DateTime.now())) {
       return "Today";
@@ -56,7 +54,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
                 'Settings',
                 style: TextStyle(
                     fontSize: 14,
-                    fontFamily: Constants.FontSFPro,
+                    fontFamily: Constants.fontSFPro,
                     color: blackColor.withOpacity(0.3)),
               ),
             ),
@@ -77,13 +75,13 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
                 maxLines: 4,
                 maxLength: 250,
                 style: TextStyle(
-                    fontFamily: Constants.FontSFPro,
+                    fontFamily: Constants.fontSFPro,
                     fontSize: 15,
                     color: blackColor),
                 decoration: InputDecoration(
                   labelText: 'Notes',
                   labelStyle: TextStyle(
-                      fontFamily: Constants.FontSFPro,
+                      fontFamily: Constants.fontSFPro,
                       fontSize: 15,
                       color: blackColor.withOpacity(0.7)),
                   border: InputBorder.none,
@@ -158,7 +156,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
               style: TextStyle(
                   color: getColor(value),
                   fontSize: 40,
-                  fontFamily: Constants.FontSFPro,
+                  fontFamily: Constants.fontSFPro,
                   fontWeight: FontWeight.w600),
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -180,7 +178,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
           child: Text(
             'Category',
             style: TextStyle(
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 15,
                 color: blackColor.withOpacity(0.7)),
           ),
@@ -194,7 +192,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
             alignment: Alignment.centerRight,
             style: TextStyle(
                 color: accentColor,
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontSize: 16),
             icon: const Icon(
               Icons.arrow_forward_ios_outlined,
@@ -218,9 +216,10 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
           child: Text(
             'Date',
             style: TextStyle(
-                fontFamily: Constants.FontSFPro,
-                fontSize: 15,
-                color: blackColor.withOpacity(0.7)),
+              fontFamily: Constants.fontSFPro,
+              fontSize: 15,
+              color: blackColor.withOpacity(0.7),
+            ),
           ),
         ),
         Container(
@@ -231,9 +230,10 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
               child: Text(
                 getDate(_dataTime),
                 style: TextStyle(
-                    color: accentColor,
-                    fontFamily: Constants.FontSFPro,
-                    fontSize: 16),
+                  color: accentColor,
+                  fontFamily: Constants.fontSFPro,
+                  fontSize: 16,
+                ),
               ),
               onPressed: () {
                 showDatePicker(
@@ -257,9 +257,10 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
           child: Text(
             'Account',
             style: TextStyle(
-                fontFamily: Constants.FontSFPro,
-                fontSize: 15,
-                color: blackColor.withOpacity(0.7)),
+              fontFamily: Constants.fontSFPro,
+              fontSize: 15,
+              color: blackColor.withOpacity(0.7),
+            ),
           ),
         ),
         Container(
@@ -270,9 +271,10 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
             value: valueAccount,
             alignment: Alignment.centerRight,
             style: TextStyle(
-                color: accentColor,
-                fontFamily: Constants.FontSFPro,
-                fontSize: 16),
+              color: accentColor,
+              fontFamily: Constants.fontSFPro,
+              fontSize: 16,
+            ),
             icon: const Icon(
               Icons.arrow_forward_ios_outlined,
               color: blackColorOpacity30,
@@ -295,21 +297,20 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
           child: Text(
             'Transfer ${(value ? 'to' : 'from')} Account',
             style: TextStyle(
-                fontFamily: Constants.FontSFPro,
-                fontSize: 15,
-                color: blackColor.withOpacity(0.7)),
+              fontFamily: Constants.fontSFPro,
+              fontSize: 15,
+              color: blackColor.withOpacity(0.7),
+            ),
           ),
         ),
         Container(
-          padding: EdgeInsets.only(
-            right: 11,
-          ),
+          padding: EdgeInsets.only(right: 11),
           child: DropdownButton<String>(
             value: valueTransfer,
             alignment: Alignment.centerRight,
             style: TextStyle(
               color: blackColor.withOpacity(0.1),
-              fontFamily: Constants.FontSFPro,
+              fontFamily: Constants.fontSFPro,
               fontSize: 16,
             ),
             icon: const Icon(
@@ -335,19 +336,21 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
         child: Text(
           'Cancel',
           style: TextStyle(
-              color: accentColor,
-              fontFamily: Constants.FontSFPro,
-              fontSize: 17),
+            color: accentColor,
+            fontFamily: Constants.fontSFPro,
+            fontSize: 17,
+          ),
         ),
       ),
       centerTitle: true,
       title: Text(
         getTitle(value),
         style: TextStyle(
-            color: Colors.black,
-            fontFamily: Constants.FontSFPro,
-            fontSize: 17,
-            fontWeight: FontWeight.w500),
+          color: Colors.black,
+          fontFamily: Constants.fontSFPro,
+          fontSize: 17,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       actions: [
         TextButton(
@@ -355,9 +358,10 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
           child: Text(
             'Done',
             style: TextStyle(
-                color: accentColor,
-                fontFamily: Constants.FontSFPro,
-                fontSize: 17),
+              color: accentColor,
+              fontFamily: Constants.fontSFPro,
+              fontSize: 17,
+            ),
           ),
         ),
       ],

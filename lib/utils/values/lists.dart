@@ -1,27 +1,24 @@
-
-final iconList = <String, String>{
-  'Food & Restaurants' : 'food',
-  'Car' :  'car',
-  'Coffee' : 'cup',
-  'Mobile Account' : 'phone',
-  'Rental revenue' :  'home',
-  'Salary' :  'money',
+const iconList = <String, String>{
+  'Food & Restaurants': 'food',
+  'Car': 'car',
+  'Coffee': 'cup',
+  'Mobile Account': 'phone',
+  'Rental revenue': 'home',
+  'Salary': 'money',
 };
-final currencyList = [
-  'USD',
-  'EUR',
-  'UAH'
+
+const currencyList = ['USD', 'EUR', 'UAH'];
+
+const categoryList = [
+  'Food & Restaurants',
+  'Car',
+  'Coffee',
+  'Mobile Account',
+  'Rental revenue',
+  'Salary',
 ];
 
-final categoryList = [
-  'Food & Restaurants',
-  'Car',
-  'Coffee',
-  'Mobile Account',
-  'Rental revenue',
-  'Salary',
-];
-final titleList = [
+const titleList = [
   'Rental revenue',
   'Car',
   'Salary',
@@ -32,7 +29,8 @@ final titleList = [
   'Mobile Account',
   'Mobile Account',
 ];
-final accountList = [
+
+const accountList = [
   'Cash',
   'Credit card',
   'Wife’s credit card',
@@ -41,7 +39,8 @@ final accountList = [
   'Home loan',
   'Home loan',
 ];
-final valuesList = <double>[
+
+const valuesList = <double>[
   1500,
   -193.02,
   7500,

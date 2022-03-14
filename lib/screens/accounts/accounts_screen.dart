@@ -3,6 +3,7 @@ import 'package:cash/utils/navigation/project_router.dart';
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
 import 'package:cash/utils/values/lists.dart';
+import 'package:cash/widgets/custom_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -119,7 +120,7 @@ class _AccountsScreenState extends State<AccountsScreen>
             style: TextStyle(
                 fontSize: 40,
                 color: whiteColor,
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontWeight: FontWeight.w700),
           ),
           padding: const EdgeInsets.only(bottom: 5),
@@ -166,7 +167,7 @@ class _AccountsScreenState extends State<AccountsScreen>
                         style: TextStyle(
                             fontSize: 40,
                             color: whiteColor,
-                            fontFamily: Constants.FontSFPro,
+                            fontFamily: Constants.fontSFPro,
                             fontWeight: FontWeight.w600),
                       ),
                       Container(
@@ -177,13 +178,13 @@ class _AccountsScreenState extends State<AccountsScreen>
                           style: TextStyle(
                             fontSize: 19,
                             color: whiteColor.withOpacity(0.5),
-                            fontFamily: Constants.FontSFPro,
+                            fontFamily: Constants.fontSFPro,
                           ),
                         ),
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -200,7 +201,7 @@ class _AccountsScreenState extends State<AccountsScreen>
                   style: TextStyle(
                     fontSize: 12,
                     color: whiteColor.withOpacity(0.5),
-                    fontFamily: Constants.FontSFPro,
+                    fontFamily: Constants.fontSFPro,
                   ),
                 ),
               ),
@@ -209,7 +210,7 @@ class _AccountsScreenState extends State<AccountsScreen>
                 style: TextStyle(
                     fontSize: 24,
                     color: whiteColor,
-                    fontFamily: Constants.FontSFPro),
+                    fontFamily: Constants.fontSFPro),
               ),
               Container(
                 padding: const EdgeInsets.only(right: 131, top: 16),
@@ -218,7 +219,7 @@ class _AccountsScreenState extends State<AccountsScreen>
                   style: TextStyle(
                     //fontFamily: SF,
                     fontSize: 12,
-                    fontFamily: Constants.FontSFPro,
+                    fontFamily: Constants.fontSFPro,
                     color: whiteColor.withOpacity(0.5),
                   ),
                 ),
@@ -226,9 +227,10 @@ class _AccountsScreenState extends State<AccountsScreen>
               Text(
                 getSignText(expenses),
                 style: TextStyle(
-                    fontSize: 24,
-                    color: whiteColor,
-                    fontFamily: Constants.FontSFPro),
+                  fontSize: 24,
+                  color: whiteColor,
+                  fontFamily: Constants.fontSFPro,
+                ),
               ),
             ],
           ),
@@ -268,18 +270,20 @@ class _AccountsScreenState extends State<AccountsScreen>
         title: Text(
           accountList[index],
           style: TextStyle(
-              color: blackColor.withOpacity(0.8),
-              fontFamily: Constants.FontSFPro,
-              fontSize: 16,
-              fontWeight: FontWeight.w500),
+            color: blackColor.withOpacity(0.8),
+            fontFamily: Constants.fontSFPro,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         subtitle: Text(
           getSignText(valuesList[index]),
           style: TextStyle(
-              color: getColor(valuesList[index]),
-              fontSize: 28,
-              fontFamily: Constants.FontSFPro,
-              fontWeight: FontWeight.w600),
+            color: getColor(valuesList[index]),
+            fontSize: 28,
+            fontFamily: Constants.fontSFPro,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
@@ -398,7 +402,7 @@ class _AccountsScreenState extends State<AccountsScreen>
       leadingWidth: 48,
       title: const Text(
         'Accounts',
-        style: TextStyle(fontFamily: Constants.FontSFPro, fontSize: 17),
+        style: TextStyle(fontFamily: Constants.fontSFPro, fontSize: 17),
       ),
       centerTitle: true,
       actions: <Widget>[
@@ -418,22 +422,7 @@ class _AccountsScreenState extends State<AccountsScreen>
         ),
       ],
       elevation: 0.0,
-      bottom: const TabBar(
-        indicatorColor: whiteColor,
-        labelStyle: TextStyle(
-            fontSize: 13,
-            fontFamily: Constants.FontSFPro,
-            color: whiteColorOpacity70,
-            fontWeight: FontWeight.w600),
-        tabs: [
-          Tab(
-            text: Constants.dailyTabName,
-          ),
-          Tab(text: Constants.weeklyTabName),
-          Tab(text: Constants.monthlyTabName),
-          Tab(text: Constants.yearlyTabName),
-        ],
-      ),
+      bottom: CustomTabBar(),
     );
   }
 }

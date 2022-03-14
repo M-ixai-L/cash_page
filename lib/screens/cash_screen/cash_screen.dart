@@ -3,6 +3,7 @@ import 'package:cash/utils/navigation/project_router.dart';
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
 import 'package:cash/utils/values/lists.dart';
+import 'package:cash/widgets/custom_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -123,7 +124,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
             style: TextStyle(
                 fontSize: 40,
                 color: whiteColor,
-                fontFamily: Constants.FontSFPro,
+                fontFamily: Constants.fontSFPro,
                 fontWeight: FontWeight.w700),
           ),
           padding: const EdgeInsets.only(bottom: 5),
@@ -170,7 +171,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                         style: TextStyle(
                             fontSize: 40,
                             color: whiteColor,
-                            fontFamily: Constants.FontSFPro,
+                            fontFamily: Constants.fontSFPro,
                             fontWeight: FontWeight.w600),
                       ),
                       Container(
@@ -181,7 +182,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 19,
                             color: whiteColor.withOpacity(0.5),
-                            fontFamily: Constants.FontSFPro,
+                            fontFamily: Constants.fontSFPro,
                           ),
                         ),
                       )
@@ -204,7 +205,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontSize: 12,
                     color: whiteColor.withOpacity(0.5),
-                    fontFamily: Constants.FontSFPro,
+                    fontFamily: Constants.fontSFPro,
                   ),
                 ),
               ),
@@ -213,7 +214,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                 style: TextStyle(
                     fontSize: 24,
                     color: whiteColor,
-                    fontFamily: Constants.FontSFPro),
+                    fontFamily: Constants.fontSFPro),
               ),
               Container(
                 padding: const EdgeInsets.only(right: 131, top: 16),
@@ -222,7 +223,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                   style: TextStyle(
                     //fontFamily: SF,
                     fontSize: 12,
-                    fontFamily: Constants.FontSFPro,
+                    fontFamily: Constants.fontSFPro,
                     color: whiteColor.withOpacity(0.5),
                   ),
                 ),
@@ -232,7 +233,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                 style: TextStyle(
                     fontSize: 24,
                     color: whiteColor,
-                    fontFamily: Constants.FontSFPro),
+                    fontFamily: Constants.fontSFPro),
               ),
             ],
           ),
@@ -332,7 +333,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
         titleList[index],
         style: TextStyle(
             color: blackColor.withOpacity(0.8),
-            fontFamily: Constants.FontSFPro,
+            fontFamily: Constants.fontSFPro,
             fontSize: 16,
             fontWeight: FontWeight.w500),
       ),
@@ -341,7 +342,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
         style: TextStyle(
             color: getColor(valuesList[index]),
             fontSize: 22,
-            fontFamily: Constants.FontSFPro,
+            fontFamily: Constants.fontSFPro,
             fontWeight: FontWeight.w500),
       ),
     );
@@ -361,9 +362,10 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
             Text(
               'Accounts',
               style: TextStyle(
-                  fontFamily: Constants.FontSFPro,
-                  fontSize: 17,
-                  color: whiteColor),
+                fontFamily: Constants.fontSFPro,
+                fontSize: 17,
+                color: whiteColor,
+              ),
             ),
           ],
         ),
@@ -372,9 +374,10 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
       title: const Text(
         'Cash',
         style: TextStyle(
-            color: Color(0xCCFFFFFF),
-            fontFamily: Constants.FontSFPro,
-            fontSize: 17),
+          color: greyColor,
+          fontFamily: Constants.fontSFPro,
+          fontSize: 17,
+        ),
       ),
       centerTitle: true,
       actions: <Widget>[
@@ -383,26 +386,12 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
           onPressed: () => showSnackBar(context, 'Search'),
         ),
         IconButton(
-            icon: const Icon(CupertinoIcons.add),
-            onPressed: () => Navigation.toScreen(Routes.addNewTransaction)),
+          icon: const Icon(CupertinoIcons.add),
+          onPressed: () => Navigation.toScreen(Routes.addNewTransaction),
+        ),
       ],
       elevation: 0.0,
-      bottom: const TabBar(
-        indicatorColor: whiteColor,
-        labelStyle: TextStyle(
-            fontSize: 13,
-            fontFamily: Constants.FontSFPro,
-            color: Color(0xB3FFFFFF),
-            fontWeight: FontWeight.w600),
-        tabs: [
-          Tab(
-            text: Constants.dailyTabName,
-          ),
-          Tab(text: Constants.weeklyTabName),
-          Tab(text: Constants.monthlyTabName),
-          Tab(text: Constants.yearlyTabName),
-        ],
-      ),
+      bottom: CustomTabBar(),
     );
   }
 }
