@@ -8,6 +8,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return TabBar(
+      labelPadding: EdgeInsets.zero,
       indicatorColor: whiteColor,
       labelStyle: TextStyle(
         fontSize: 13,
