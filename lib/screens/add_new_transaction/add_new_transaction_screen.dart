@@ -1,16 +1,18 @@
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
+import 'package:cash/utils/values/lists.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cash/utils/values/lists.dart';
 import 'package:intl/intl.dart';
 
-class CashNewScreen extends StatefulWidget {
+class AddNewTransactionScreen extends StatefulWidget {
+  const AddNewTransactionScreen({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => _CashNewScreenState();
+  State<StatefulWidget> createState() => _AddNewTransactionScreenState();
 }
 
-class _CashNewScreenState extends State<CashNewScreen>
+class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
     with TickerProviderStateMixin {
   bool value = false;
   String? valueCategory = categoryList[0];
@@ -329,7 +331,7 @@ class _CashNewScreenState extends State<CashNewScreen>
       leadingWidth: 87,
       elevation: 0,
       leading: TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/cashScreen'),
+        onPressed: () => Navigator.pop(context),
         child: Text(
           'Cancel',
           style: TextStyle(

@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:cash/utils/navigation/navigation.dart';
+import 'package:cash/utils/navigation/project_router.dart';
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:cash/utils/values/lists.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AccountsScreen extends StatefulWidget {
@@ -262,7 +264,7 @@ class _AccountsScreenState extends State<AccountsScreen>
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8), color: whiteColor),
       child: ListTile(
-        onTap: () => Navigator.pushNamed(context, '/cashScreen'),
+        onTap: () => Navigation.toScreen(Routes.cash),
         title: Text(
           accountList[index],
           style: TextStyle(
@@ -314,8 +316,9 @@ class _AccountsScreenState extends State<AccountsScreen>
                   height: 58,
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/addNewCashScreen'),
+                    onPressed: () => Navigation.toScreen(
+                      Routes.addNewTransaction,
+                    ),
                     child: Text(
                       'Operation',
                       style: TextStyle(
@@ -331,8 +334,9 @@ class _AccountsScreenState extends State<AccountsScreen>
                   height: 58,
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/addNewCashScreen'),
+                    onPressed: () => Navigation.toScreen(
+                      Routes.addNewTransaction,
+                    ),
                     child: Text(
                       'Account',
                       style: TextStyle(
@@ -356,9 +360,7 @@ class _AccountsScreenState extends State<AccountsScreen>
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child:
-                  //onPressed: () => Navigator.pushNamed(context, '/addNewCashScreen'),
-                  Text(
+              child: Text(
                 'Cancel',
                 style: TextStyle(
                   color: accentColor,
@@ -372,6 +374,7 @@ class _AccountsScreenState extends State<AccountsScreen>
       ),
     );
   }
+
   PreferredSize get separatorWidget {
     return PreferredSize(
       preferredSize: const Size.fromHeight(1),
@@ -381,6 +384,7 @@ class _AccountsScreenState extends State<AccountsScreen>
       ),
     );
   }
+
   AppBar appBar(BuildContext context) {
     return AppBar(
       backgroundColor: getColor(balance),
@@ -389,7 +393,7 @@ class _AccountsScreenState extends State<AccountsScreen>
           'assets/icons/settings.svg',
           color: whiteColor,
         ),
-        onPressed: () => Navigator.pushNamed(context, '/settingsScreen'),
+        onPressed: () => Navigation.toScreen(Routes.settings),
       ),
       leadingWidth: 48,
       title: const Text(
@@ -400,7 +404,7 @@ class _AccountsScreenState extends State<AccountsScreen>
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.search),
-          onPressed: () => print('asdf'),
+          onPressed: () => print('Search'),
         ),
         IconButton(
           icon: const Icon(CupertinoIcons.add),

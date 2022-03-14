@@ -1,9 +1,11 @@
+import 'package:cash/utils/navigation/navigation.dart';
+import 'package:cash/utils/navigation/project_router.dart';
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
+import 'package:cash/utils/values/lists.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:cash/utils/values/lists.dart';
 
 class CashScreen extends StatefulWidget {
   const CashScreen({Key? key}) : super(key: key);
@@ -253,8 +255,9 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(top: 28),
                   child: TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/addNewCashScreen'),
+                    onPressed: () => Navigation.toScreen(
+                      Routes.addNewTransaction,
+                    ),
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -348,7 +351,7 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
     return AppBar(
       backgroundColor: accentColor,
       leading: TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/accountsScreen'),
+        onPressed: () => Navigator.pop(context),
         child: Row(
           children: const <Widget>[
             Icon(
@@ -380,9 +383,8 @@ class _CashScreenState extends State<CashScreen> with TickerProviderStateMixin {
           onPressed: () => showSnackBar(context, 'Search'),
         ),
         IconButton(
-          icon: const Icon(CupertinoIcons.add),
-          onPressed: () => Navigator.pushNamed(context, '/addNewCashScreen'),
-        ),
+            icon: const Icon(CupertinoIcons.add),
+            onPressed: () => Navigation.toScreen(Routes.addNewTransaction)),
       ],
       elevation: 0.0,
       bottom: const TabBar(

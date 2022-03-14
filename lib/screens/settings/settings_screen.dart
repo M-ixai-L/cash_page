@@ -1,7 +1,7 @@
 import 'package:cash/utils/values/colors.dart';
 import 'package:cash/utils/values/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:cash/utils/values/lists.dart';
+import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -15,15 +15,12 @@ class _SettingsScreenState extends State<SettingsScreen>
   bool value = false;
   var valueList = <String?>['USD', 'USD', 'USD'];
 
-
-
   void showSnackBar(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: greyColor,
       appBar: appBar(context),
@@ -58,19 +55,17 @@ class _SettingsScreenState extends State<SettingsScreen>
                 subscribeButton,
               ],
             ),
-
-             Container(
-                color: greyColor,
-                padding: EdgeInsets.only(bottom: 44),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    sendButton,
-                    rateButton,
-                  ],
-                ),
+            Container(
+              color: greyColor,
+              padding: EdgeInsets.only(bottom: 44),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  sendButton,
+                  rateButton,
+                ],
               ),
-
+            ),
           ],
         ),
       ),
@@ -102,7 +97,6 @@ class _SettingsScreenState extends State<SettingsScreen>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-
             padding: EdgeInsets.only(left: 16, bottom: 13, top: 13),
             child: Text(
               title,
@@ -241,13 +235,12 @@ class _SettingsScreenState extends State<SettingsScreen>
               ),
             ),
           )),
-
     );
   }
+
   Widget get rateButton {
     return Container(
       color: greyColor,
-
       child: TextButton(
           onPressed: () => showSnackBar(context, 'rate'),
           child: Container(
@@ -269,13 +262,14 @@ class _SettingsScreenState extends State<SettingsScreen>
           )),
     );
   }
+
   AppBar appBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
       leadingWidth: 87,
       elevation: 0,
       leading: TextButton(
-        onPressed: () => Navigator.pushNamed(context, '/accountsScreen'),
+        onPressed: () => Navigator.pop(context),
         child: Text(
           'Cancel',
           style: TextStyle(
