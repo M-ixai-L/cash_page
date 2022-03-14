@@ -15,8 +15,7 @@ class AddNewTransactionScreen extends StatefulWidget {
 class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
     with TickerProviderStateMixin {
   bool value = false;
-  String? valueCategory = categoryList[0];
-  String? valueAccount = accountList[0];
+  var valueList = <String?>[categoryList[0], accountList[0], 'Optional'];
   String? valueTransfer = 'Optional';
   DateTime? _dataTime = DateTime.now();
 
@@ -25,6 +24,8 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
   String getPrefix(bool value) => value == true ? '-\$0' : '\$0';
 
   String getTitle(bool value) => value == true ? 'Expense' : 'Income';
+
+  List<String?> getList(bool value) => value == true ? expenseList : incomeList;
 
   String getDate(DateTime? date) {
     if (date == null) return "Today";
@@ -188,7 +189,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
             right: 11,
           ),
           child: DropdownButton<String>(
-            value: valueCategory,
+            value: getList(value)[0],
             alignment: Alignment.centerRight,
             style: TextStyle(
                 color: accentColor,
@@ -199,7 +200,8 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
               color: blackColorOpacity30,
             ),
             underline: Container(),
-            onChanged: (newValue) => setState(() => valueCategory = newValue),
+            onChanged: (newValue) =>
+                setState(() => getList(value)[0] = newValue),
             items: categoryList.map(categoryBuildMenu).toList(),
           ),
         ),
@@ -268,7 +270,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
             right: 11,
           ),
           child: DropdownButton<String>(
-            value: valueAccount,
+            value: valueList[1],
             alignment: Alignment.centerRight,
             style: TextStyle(
               color: accentColor,
@@ -280,7 +282,7 @@ class _AddNewTransactionScreenState extends State<AddNewTransactionScreen>
               color: blackColorOpacity30,
             ),
             underline: Container(),
-            onChanged: (newValue) => setState(() => valueAccount = newValue),
+            onChanged: (newValue) => setState(() => valueList[1] = newValue),
             items: accountList.map(accountBuildMenu).toList(),
           ),
         ),

@@ -18,6 +18,18 @@ const categoryList = [
   'Salary',
 ];
 
+const incomeList = [
+  'Salary',
+  'Rental revenue',
+];
+
+const expenseList = [
+  'Food & Restaurants',
+  'Car',
+  'Coffee',
+  'Mobile Account',
+];
+
 const titleList = [
   'Rental revenue',
   'Car',
